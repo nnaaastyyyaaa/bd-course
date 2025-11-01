@@ -1,0 +1,7 @@
+![alt text](address.png)
+![alt text](orders.png)
+![alt text](product.png)
+![alt text](client.png)
+![alt text](payment.png)
+![alt text](shipment.png)
+![alt text](category.png)
