@@ -62,7 +62,8 @@ CREATE TABLE IF NOT EXISTS order_item (
     order_item_id serial PRIMARY KEY,
     quantity integer NOT NULL CHECK (quantity > 0),
     order_id integer NOT NULL REFERENCES orders(order_id),
-    product_id integer NOT NULL REFERENCES product(product_id)
+    product_id integer NOT NULL REFERENCES product(product_id),
+    CONSTRAINT unique_order_item UNIQUE (order_id, product_id)
 );
 
 CREATE TYPE methods AS ENUM ('by card', 'online', 'by cash on delivery');
