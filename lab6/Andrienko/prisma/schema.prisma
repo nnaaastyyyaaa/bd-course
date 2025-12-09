@@ -4,6 +4,7 @@ generator client {
 
 datasource db {
   provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 model address {
@@ -33,6 +34,7 @@ model client {
   phone_number String?   @db.VarChar(20)
   address      address[]
   orders       orders[]
+  review review[]
 }
 
 /// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
@@ -84,10 +86,10 @@ model product {
   quantity     Int
   description  String            @db.VarChar(255)
   stock_status stock_status_name
-  image_url    String?
   category_id  Int
   order_item   order_item[]
   category     category          @relation(fields: [category_id], references: [category_id], onDelete: NoAction, onUpdate: NoAction)
+  review review[]
 }
 
 /// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
@@ -114,6 +116,15 @@ model worker {
   shipment     shipment[]
 }
 
+model review {
+  id        Int     @id @default(autoincrement())
+  rating    Int
+  comment   String?
+  product   product @relation(fields: [product_id], references: [product_id])
+  product_id Int
+  client client @relation(fields: [client_id], references: [client_id])
+  client_id Int
+}
 enum methods {
   by_card             @map("by card")
   online
