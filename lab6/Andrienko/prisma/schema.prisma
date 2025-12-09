@@ -1,6 +1,5 @@
 generator client {
-  provider = "prisma-client"
-  output   = "../generated/prisma"
+  provider = "prisma-client-js"
 }
 
 datasource db {
@@ -108,7 +107,7 @@ model shipment {
 model worker {
   worker_id    Int        @id @default(autoincrement())
   worker_role  role_name
-  first_name   String     @db.VarChar(32)
+  f_name String @db.VarChar(32)
   last_name    String     @db.VarChar(32)
   phone_number String?    @unique @db.VarChar(13)
   orders       orders[]
